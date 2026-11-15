@@ -1,15 +1,15 @@
 import { APP_NAME } from '../config'
-import { DevReset } from './DevReset'
-import { Icon } from './Icon'
+import { ICONS } from '../lib/sprite'
+import { PixelSprite } from './PixelSprite'
 import { TABS, isActive } from './nav'
 
 /** Replaces the bottom tabs at desktop widths. */
 export function Sidebar({ path }: { path: string }) {
   return (
-    <aside className="fixed inset-y-0 left-0 hidden w-64 flex-col border-r border-line bg-white p-6 lg:flex">
-      <p className="px-3 text-2xl font-bold tracking-tight">{APP_NAME}</p>
+    <aside className="fixed inset-y-0 left-0 hidden w-64 flex-col border-r-4 border-ink bg-card p-6 lg:flex">
+      <p className="font-pixel text-lg">{APP_NAME}</p>
       <nav aria-label="Main" className="mt-8">
-        <ul className="space-y-1">
+        <ul className="space-y-3">
           {TABS.map((t) => {
             const on = isActive(t.path, path)
             return (
@@ -17,9 +17,9 @@ export function Sidebar({ path }: { path: string }) {
                 <a
                   href={'#' + t.path}
                   aria-current={on ? 'page' : undefined}
-                  className={`flex h-12 items-center gap-3 rounded-xl px-3 text-[17px] ${on ? 'bg-ink font-semibold text-white' : 'font-medium text-ink hover:bg-mist'}`}
+                  className={`flex h-12 items-center gap-3 px-3 font-pixel text-[12px] ${on ? 'px bg-sun' : 'hover:bg-sand'}`}
                 >
-                  <Icon name={t.icon} />
+                  <PixelSprite grid={ICONS[t.icon]} colors={{ o: '#3b2a1e' }} px={3} />
                   {t.label}
                 </a>
               </li>
@@ -27,7 +27,6 @@ export function Sidebar({ path }: { path: string }) {
           })}
         </ul>
       </nav>
-      <DevReset className="mt-auto self-start" />
     </aside>
   )
 }

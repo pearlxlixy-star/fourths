@@ -1,10 +1,8 @@
-import type { IconName } from './Icon'
-
 /** Exactly three tabs. Used by the bottom bar and the sidebar. */
-export const TABS: { path: string; label: string; icon: IconName }[] = [
-  { path: '/timeline', label: 'Timeline', icon: 'calendar' },
-  { path: '/goal', label: 'Goal', icon: 'target' },
-  { path: '/plans', label: 'Plans', icon: 'cards' },
-]
+export const TABS = [
+  { path: '/home', label: 'Home', icon: 'home' },
+  { path: '/story', label: 'Story', icon: 'story' },
+  { path: '/habits', label: 'Habits', icon: 'habits' },
+] as const
 
 export const isActive = (tab: string, path: string) => path === tab || path.startsWith(tab + '/')

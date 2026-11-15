@@ -1,28 +1,33 @@
 import { ButtonLink } from '../components/Button'
-import { DevReset } from '../components/DevReset'
+import { HeroSprite } from '../components/HeroSprite'
 import { APP_NAME } from '../config'
+import { FURS, SHIRTS } from '../lib/sprite'
+import type { Hero } from '../types'
+
+const CAST: Hero[] = [
+  { name: '', species: 'bunny', fur: FURS[3], shirt: SHIRTS[1], accessory: 'bow' },
+  { name: '', species: 'fox', fur: FURS[1], shirt: SHIRTS[2], accessory: 'none' },
+  { name: '', species: 'frog', fur: FURS[4], shirt: SHIRTS[3], accessory: 'cap' },
+]
 
 export function Welcome() {
   return (
-    <div className="min-h-dvh bg-white md:flex md:items-center md:justify-center md:bg-mist md:p-8">
-      <main className="screen-in mx-auto flex min-h-dvh w-full max-w-[480px] flex-col px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-6 md:min-h-[700px] md:rounded-3xl md:bg-white md:p-8 md:shadow-lift">
-        <p className="text-2xl font-bold tracking-tight">{APP_NAME}</p>
-        <div className="flex flex-1 flex-col justify-center py-10">
-          {/* Four payments, one done: the whole idea in one mark. */}
-          <div aria-hidden="true" className="mb-8 flex gap-2">
-            <span className="h-3 flex-1 rounded-full bg-green" />
-            <span className="h-3 flex-1 rounded-full bg-ink" />
-            <span className="h-3 flex-1 rounded-full bg-ink" />
-            <span className="h-3 flex-1 rounded-full bg-line" />
+    <div className="min-h-dvh bg-paper md:flex md:items-center md:justify-center md:bg-sky md:p-8">
+      <main className="screen-in mx-auto flex min-h-dvh w-full max-w-[480px] flex-col bg-paper px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-6 md:min-h-[720px] md:border-4 md:border-ink md:p-8 md:shadow-[8px_8px_0_var(--color-ink)]">
+        <p className="font-pixel text-lg">{APP_NAME}</p>
+        <div className="flex flex-1 flex-col justify-center gap-8 py-8">
+          <div className="px flex items-end justify-around bg-sky px-2 pt-6" aria-hidden="true">
+            {CAST.map((h, i) => (
+              <div key={i} className="border-b-0">
+                <HeroSprite hero={h} px={i === 1 ? 6 : 5} mood={i === 1 ? 'happy' : 'ok'} />
+              </div>
+            ))}
           </div>
-          <h1 tabIndex={-1} className="text-[34px] font-bold leading-[1.1] tracking-tight md:text-[40px]">
-            See every pay-later payment before it leaves your account.
+          <h1 tabIndex={-1} className="font-pixel text-[20px] leading-[1.6] md:text-[22px]">
+            Make a character. See what your money choices turn them into.
           </h1>
         </div>
-        <ButtonLink to="/choose">Get started</ButtonLink>
-        <div className="mt-2 flex min-h-11 justify-center">
-          <DevReset />
-        </div>
+        <ButtonLink to="/create/1">Start</ButtonLink>
       </main>
     </div>
   )

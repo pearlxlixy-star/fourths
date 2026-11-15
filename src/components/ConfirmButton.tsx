@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Button } from './Button'
 
-/** A quiet button for things that can't be undone: the first tap asks, the second tap does it. */
+/** For things that can't be undone: the first tap asks, the second tap does it. */
 export function ConfirmButton({ label, confirmLabel, onConfirm }: { label: string; confirmLabel: string; onConfirm: () => void }) {
   const [asking, setAsking] = useState(false)
   return (
